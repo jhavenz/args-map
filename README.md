@@ -1,11 +1,5 @@
 # map unordered or unnamed arguments to their respective parameter
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/jhavenz/args-map.svg?style=flat-square)](https://packagist.org/packages/jhavenz/args-map)
-[![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/jhavenz/args-map/run-tests.yml?branch=main&label=tests&style=flat-square)](https://github.com/jhavenz/args-map/actions?query=workflow%3Arun-tests+branch%3Amain)
-[![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/jhavenz/args-map/fix-php-code-style-issues.yml?branch=main&label=code%20style&style=flat-square)](https://github.com/jhavenz/args-map/actions?query=workflow%3A"Fix+PHP+code+style+issues"+branch%3Amain)
-[![Total Downloads](https://img.shields.io/packagist/dt/jhavenz/args-map.svg?style=flat-square)](https://packagist.org/packages/jhavenz/args-map)
-
-
 You can install the package via composer:
 
 ```bash
@@ -14,9 +8,65 @@ composer require jhavenz/args-map
 
 ## Usage
 
+The examples below will use refer to this example class:
 ```php
-$mappedArguments = new Jhavenz\MappedArguments();
-echo $mappedArguments->echoPhrase('Hello, Jhavenz!');
+class SomeClass
+{
+    public function someMethod(DateTimeInterface $createdAt, IFilesystem $files, ?DateTimeInterface $modifiedAt = null): void
+    {
+        //
+    }
+}
+```
+
+
+Scenario 1 - some args are missing their name
+```php
+$map = ArgsMap::fromCallable([SomeClass::class, 'someMethod'], [
+    'files' => app('filesystem.disk'),
+    'modifiedAt' => yesterday(),
+    lastMonth(), 
+]);
+
+// The 3rd param is inferred as the $createdAt argument
+expect($map->create())->toBe([
+    'createdAt' => lastMonth(),
+    'files' => app('filesystem.disk'),
+    'modifiedAt' => yesterday(),
+]);
+```
+
+#Scenario 2 - some args are missing (and may be missing their name)
+```php
+$map = ArgsMap::fromCallable([SomeClass::class, 'someMethod'], [
+    'files' => app('filesystem.disk'),
+    lastMonth(),
+]);
+
+// The 3rd param receives its default value,
+// while the unnamed (required) param is inferred
+// as the lastMonth() value given, a logical assumption...
+expect($map->create())->toBe([
+    'createdAt' => lastMonth(),
+    'files' => app('filesystem.disk'),
+    'modifiedAt' => null,
+]);
+```
+
+#Scenario 3 - ambiguous args still throw an error
+```php
+$map = ArgsMap::fromCallable([SomeClass::class, 'someMethod'], [
+    app('filesystem.disk'),
+    lastMonth(), 
+    yesterday(),
+]);
+
+// While the app('filesystem.disk') value given
+// can be inferred (since it's the type signature
+// only has one corresponding match), the last two
+// arguments still leave room for ambiguity, so an
+// error will be thrown
+expect($map->create())->toThrow(ArgumentMappingException::class);
 ```
 
 ## Testing
@@ -31,7 +81,7 @@ Contributions welcome
 
 ## Security Vulnerabilities
 
-[contact me](mailto://mail@jhavens.tech) to report security vulnerabilities.
+contact me at mail@jhavens.tech to report security vulnerabilities.
 
 ## License
 
