@@ -1,12 +1,12 @@
 {
-    "name": "jhavenz/mapped-arguments",
+    "name": "jhavenz/args-map",
     "description": "map unordered or unnamed arguments to their respective parameter",
     "keywords": [
         "jhavenz",
         "laravel",
-        "mapped-arguments"
+        "args-map"
     ],
-    "homepage": "https://github.com/jhavenz/mapped-arguments",
+    "homepage": "https://github.com/jhavenz/args-map",
     "license": "MIT",
     "authors": [
         {
@@ -28,6 +28,7 @@
         "pestphp/pest": "^2.0",
         "pestphp/pest-plugin-arch": "^2.0",
         "pestphp/pest-plugin-laravel": "^2.0",
+        "pestphp/pest-plugin-watch": "^2.0",
         "phpstan/extension-installer": "^1.1",
         "phpstan/phpstan-deprecation-rules": "^1.0",
         "phpstan/phpstan-phpunit": "^1.0",

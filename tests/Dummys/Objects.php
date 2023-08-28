@@ -24,15 +24,11 @@ class Objects
     public static function unorderedKeys(): Closure
     {
         return function () {
-            yield fn () => [
+            yield 'unordered args 1' => fn () => [
                 'files' => Objects::files(),
                 'modifiedAt' => Objects::modifiedAt(),
             ];
-            yield fn () => [
-                'modifiedAt' => Objects::modifiedAt(),
-                'files' => Objects::files(),
-            ];
-            yield fn () => [
+            yield 'unordered args 2' => fn () => [
                 'modifiedAt' => Objects::modifiedAt(),
                 'files' => Objects::files(),
             ];
@@ -42,19 +38,19 @@ class Objects
     public static function fracturedMap(): Closure
     {
         return function () {
-            yield fn () => [
+            yield 'fractured map 1' => fn () => [
                 Objects::files(),
                 Objects::modifiedAt(),
             ];
-            yield fn () => [
+            yield 'fractured map 2' => fn () => [
                 Objects::modifiedAt(),
                 Objects::files(),
             ];
-            yield fn () => [
+            yield 'fractured map 3' => fn () => [
                 'files' => Objects::files(),
                 Objects::modifiedAt(),
             ];
-            yield fn () => [
+            yield 'fractured map 4' => fn () => [
                 Objects::files(),
                 'modifiedAt' => Objects::modifiedAt(),
             ];

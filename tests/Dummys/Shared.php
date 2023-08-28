@@ -28,7 +28,7 @@ trait Shared
         return static::$modifiedAt ??= time();
     }
 
-    public static function isReadable(): bool
+    public static function isReadOnly(): bool
     {
         return static::$readonly ??= true;
     }

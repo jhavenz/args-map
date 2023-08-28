@@ -30,20 +30,20 @@ class ObjectsAndPrimitives
     public static function unorderedKeys(): Closure
     {
         return function () {
-            yield fn () => [
+            yield 'unordered args 1' => fn () => [
                 'filePath' => ObjectsAndPrimitives::filePath(),
-                'isReadable' => ObjectsAndPrimitives::isReadable(),
+                'isReadable' => ObjectsAndPrimitives::isReadOnly(),
                 'files' => ObjectsAndPrimitives::files(),
             ];
-            yield fn () => [
-                'isReadable' => ObjectsAndPrimitives::isReadable(),
+            yield 'unordered args 2' => fn () => [
+                'isReadable' => ObjectsAndPrimitives::isReadOnly(),
                 'files' => ObjectsAndPrimitives::files(),
                 'filePath' => ObjectsAndPrimitives::filePath(),
             ];
-            yield fn () => [
+            yield 'unordered args 3' => fn () => [
                 'files' => ObjectsAndPrimitives::files(),
                 'filePath' => ObjectsAndPrimitives::filePath(),
-                'isReadable' => ObjectsAndPrimitives::isReadable(),
+                'isReadable' => ObjectsAndPrimitives::isReadOnly(),
             ];
         };
     }
@@ -51,24 +51,24 @@ class ObjectsAndPrimitives
     public static function fracturedMap(): Closure
     {
         return function () {
-            yield fn () => [
+            yield 'fractured map 1' => fn () => [
                 ObjectsAndPrimitives::filePath(),
-                'isReadable' => ObjectsAndPrimitives::isReadable(),
+                'isReadable' => ObjectsAndPrimitives::isReadOnly(),
                 'files' => ObjectsAndPrimitives::files(),
             ];
-            yield fn () => [
+            yield 'fractured map 2' => fn () => [
                 'filePath' => ObjectsAndPrimitives::filePath(),
-                ObjectsAndPrimitives::isReadable(),
+                ObjectsAndPrimitives::isReadOnly(),
                 'files' => ObjectsAndPrimitives::files(),
             ];
-            yield fn () => [
+            yield 'fractured map 3' => fn () => [
                 ObjectsAndPrimitives::filePath(),
-                ObjectsAndPrimitives::isReadable(),
+                ObjectsAndPrimitives::isReadOnly(),
                 'files' => ObjectsAndPrimitives::files(),
             ];
-            yield fn () => [
+            yield 'fractured map 4' => fn () => [
                 ObjectsAndPrimitives::filePath(),
-                ObjectsAndPrimitives::isReadable(),
+                ObjectsAndPrimitives::isReadOnly(),
                 'files' => ObjectsAndPrimitives::files(),
             ];
         };

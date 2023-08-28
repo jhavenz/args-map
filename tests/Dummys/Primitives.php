@@ -18,20 +18,20 @@ class Primitives
     public static function unorderedKeys(): Closure
     {
         return function () {
-            yield fn () => [
+            yield 'unordered args 1' => fn () => [
                 'filePath' => Primitives::filePath(),
-                'isReadable' => Primitives::isReadable(),
+                'isReadable' => Primitives::isReadOnly(),
                 'modifiedAt' => Primitives::modifiedAt(),
             ];
-            yield fn () => [
-                'isReadable' => Primitives::isReadable(),
+            yield 'unordered args 2' => fn () => [
+                'isReadable' => Primitives::isReadOnly(),
                 'modifiedAt' => Primitives::modifiedAt(),
                 'filePath' => Primitives::filePath(),
             ];
-            yield fn () => [
+            yield 'unordered args 3' => fn () => [
                 'modifiedAt' => Primitives::modifiedAt(),
                 'filePath' => Primitives::filePath(),
-                'isReadable' => Primitives::isReadable(),
+                'isReadable' => Primitives::isReadOnly(),
             ];
         };
     }
@@ -39,35 +39,35 @@ class Primitives
     public static function fracturedMap(): Closure
     {
         return function () {
-            yield fn () => [
+            yield 'fractured map 1' => fn () => [
                 Primitives::filePath(),
-                'isReadable' => Primitives::isReadable(),
+                'isReadable' => Primitives::isReadOnly(),
                 Primitives::modifiedAt(),
             ];
-            yield fn () => [
+            yield 'fractured map 2' => fn () => [
                 'filePath' => Primitives::filePath(),
                 Primitives::modifiedAt(),
-                Primitives::isReadable(),
+                Primitives::isReadOnly(),
             ];
-            yield fn () => [
+            yield 'fractured map 3' => fn () => [
                 'filePath' => Primitives::filePath(),
-                'isReadable' => Primitives::isReadable(),
+                'isReadable' => Primitives::isReadOnly(),
                 Primitives::modifiedAt(),
             ];
-            yield fn () => [
+            yield 'fractured map 4' => fn () => [
                 'modifiedAt' => Primitives::modifiedAt(),
                 'filePath' => Primitives::filePath(),
-                Primitives::isReadable(),
+                Primitives::isReadOnly(),
             ];
-            yield fn () => [
-                Primitives::isReadable(),
+            yield 'fractured map 5' => fn () => [
+                Primitives::isReadOnly(),
                 Primitives::filePath(),
                 'modifiedAt' => Primitives::modifiedAt(),
             ];
-            yield fn () => [
+            yield 'fractured map 6' => fn () => [
                 Primitives::filePath(),
                 Primitives::modifiedAt(),
-                Primitives::isReadable(),
+                Primitives::isReadOnly(),
             ];
         };
     }

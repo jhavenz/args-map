@@ -1,0 +1,2 @@
+ excludePaths:
+        - ./tests/Unit
